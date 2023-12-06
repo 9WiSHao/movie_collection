@@ -6,7 +6,7 @@ const router = createRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: '/login' // 这里设置重定向
+			redirect: '/user' // 这里设置重定向
 		},
 		{
 			path: '/login',
@@ -17,6 +17,47 @@ const router = createRouter({
 			path: '/test',
 			name: 'test',
 			component: testPageVue
+		},
+		{
+			path: '/user',
+			name: 'user',
+			component: () => import('@/views/user/mainPage.vue'),
+			redirect: '/user/search',
+			children: [
+				{
+					path: 'search',
+					name: 'userSearch',
+					component: () => import('@/views/user/subpage/searchPage.vue')
+				},
+				{
+					path: 'collection',
+					name: 'userCollection',
+					component: () => import('@/views/user/subpage/collectionPage.vue')
+				},
+				{
+					path: 'info',
+					name: 'userInfo',
+					component: () => import('@/views/user/subpage/userInfo.vue')
+				}
+			]
+		},
+		{
+			path: '/admin',
+			name: 'admin',
+			component: () => import('@/views/admin/mainPage.vue'),
+			redirect: '/admin/movie',
+			children: [
+				{
+					path: 'movie',
+					name: 'adminMovie',
+					component: () => import('@/views/admin/subpage/movieSet.vue')
+				},
+				{
+					path: 'user',
+					name: 'adminUser',
+					component: () => import('@/views/admin/subpage/userSet.vue')
+				}
+			]
 		}
 	]
 });

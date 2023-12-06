@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue';
 import type { FormInstance, FormRules } from 'element-plus'
-import { fetchLogin } from '../api/http';
-import { useUserStore } from '../stores/user';
+import { fetchLogin } from '@/api/http';
+import { useUserStore } from '@/stores/user';
+import { useRouter } from 'vue-router';
+import router from '@/router';
 
 const { setInformation } = useUserStore()
 
@@ -51,19 +53,24 @@ function handleLogin() {
         if (valid) {
             console.log(loginForm.usernameEmail);
             console.log(loginForm.password);
-            try {
-                const userData = await fetchLogin(loginForm.usernameEmail, loginForm.password)
-                setInformation({
-                    username: userData.username,
-                    email: userData.userEmail,
-                    userId: userData.userId,
-                })
-            } catch (e: any) {
-                ElMessage({
-                    message: '登录失败，用户名或密码错误',
-                    type: 'error',
-                })
-            }
+            router.push('/user')
+
+            // try {
+            //     const userData = await fetchLogin(loginForm.usernameEmail, loginForm.password)
+            //     setInformation({
+            //         username: userData.username,
+            //         email: userData.userEmail,
+            //         userId: userData.userId,
+            //         avatarUrl: userData.avatar || '/img/Akkarin.jpg',
+            //         password: userData.password,
+            //         userPrivilege: userData.userPrivilege,
+            //     })
+            // } catch (e: any) {
+            //     ElMessage({
+            //         message: '登录失败，用户名或密码错误',
+            //         type: 'error',
+            //     })
+            // }
 
         } else {
             ElMessage({

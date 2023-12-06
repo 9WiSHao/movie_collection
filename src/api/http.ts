@@ -1,11 +1,11 @@
-import { API } from './backend';
+import { API } from '@/api/backend';
 interface userRes {
 	code: number;
 	msg: string;
 	data: userData;
 }
 interface userData {
-	userId: string;
+	userId: number;
 	username: string;
 	password: string;
 	userPrivilege: number;
