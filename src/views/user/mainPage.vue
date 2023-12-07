@@ -4,7 +4,7 @@ import { RouterView } from 'vue-router'
 import { useUserStore } from '@/stores/user';
 import router from '@/router';
 const { userId, username, avatarUrl, } = useUserStore()
-const selected = ref(0)
+const selected = ref(1)
 function handleToSearch() {
     router.push('/user/search')
     selected.value = 1
@@ -49,6 +49,7 @@ function handleToUserInfo() {
 
     .left {
         width: 200px;
+        min-width: 200px;
         height: 100%;
         background-color: #1a232a;
         position: relative;
