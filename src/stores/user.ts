@@ -13,8 +13,8 @@ export const useUserStore = defineStore('userStore', () => {
 	const userId = ref(-1);
 	const username = ref('未登录');
 	const avatarUrl = ref('/img/Akkarin.jpg');
-	const email = ref('');
-	const password = ref('');
+	const email = ref('-1');
+	const password = ref('-1');
 	const userPrivilege = ref(-1);
 
 	function setInformation(data: userInformation) {
