@@ -6,7 +6,7 @@ const router = createRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: '/user' // 这里设置重定向
+			redirect: '/login' // 这里设置重定向
 		},
 		{
 			path: '/login',
@@ -22,7 +22,7 @@ const router = createRouter({
 			path: '/user',
 			name: 'user',
 			component: () => import('@/views/user/mainPage.vue'),
-			redirect: '/user/info',
+			redirect: '/user/search',
 			children: [
 				{
 					path: 'search',
