@@ -95,36 +95,32 @@ function handleLogin() {
 }
 function handleSignUp() {
 	signUpFormRef.value?.validate(async (valid: boolean) => {
-		if (valid) {
-			try {
-				console.log(signUpForm.username);
-				console.log(signUpForm.email);
-				console.log(signUpForm.password);
-
-				const res = await fetchSignUp(signUpForm.email, signUpForm.username, signUpForm.password);
-				if (res) {
-					ElMessage({
-						message: '注册成功,请返回登录',
-						type: 'success'
-					});
-					toggleSign();
-				} else {
-					ElMessage({
-						message: '注册失败',
-						type: 'error'
-					});
-				}
-			} catch (err) {
-				console.log('注册error', err);
-				ElMessage({
-					message: '注册错误',
-					type: 'error'
-				});
-			}
-		} else {
+		if (!valid) {
 			ElMessage({
 				message: '注册信息格式错误',
 				type: 'warning'
+			});
+			return;
+		}
+		try {
+			const res = await fetchSignUp(signUpForm.email, signUpForm.username, signUpForm.password);
+			if (!res) {
+				ElMessage({
+					message: '注册失败',
+					type: 'error'
+				});
+				return;
+			}
+			ElMessage({
+				message: '注册成功,请返回登录',
+				type: 'success'
+			});
+			toggleSign();
+		} catch (err) {
+			console.log('注册error', err);
+			ElMessage({
+				message: '注册错误',
+				type: 'error'
 			});
 		}
 	});
