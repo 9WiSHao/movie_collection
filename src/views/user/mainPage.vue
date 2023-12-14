@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted,computed } from 'vue';
 import { RouterView } from 'vue-router';
 import { useUserStore } from '@/stores/user';
 import router from '@/router';
-const { userId, username, avatarUrl } = useUserStore();
+const { userId, username } = useUserStore();
+const avatarUrl = computed(()=>useUserStore().avatarUrl)
+
 onMounted(() => {
 	if (userId === -1) router.push('/login');
 });

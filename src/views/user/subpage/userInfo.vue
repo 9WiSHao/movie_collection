@@ -4,6 +4,7 @@ import type { FormInstance, FormRules } from 'element-plus';
 import { useUserStore } from '@/stores/user';
 import { Akkarin } from '@/assets/Akkarin';
 import { updateUserMsg } from '@/api/http';
+import router from '@/router';
 const userStore = useUserStore();
 
 const editRef = ref<FormInstance>();
@@ -23,6 +24,7 @@ function handleEdit() {
 			message: '头像上传中',
 			type: 'warning'
 		});
+		
 		return;
 	}
 	editRef.value?.validate(async (valid: boolean) => {
@@ -41,6 +43,7 @@ function handleEdit() {
 					message: '修改成功',
 					type: 'success'
 				});
+				router.push('/login');
 			} else {
 				ElMessage({
 					message: '修改失败',
